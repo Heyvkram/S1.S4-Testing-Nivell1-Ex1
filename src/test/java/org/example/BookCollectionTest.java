@@ -7,19 +7,22 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookCollectionTest {
+    BookCollection bookCollection = new BookCollection();
+    Book firstBook = new Book("first book");
+    Book secondBook = new Book("second Book");
+    Book thirdBook = new Book("third book");
+    Book fourthBook = new Book("fourth book");
+    Book aBook = new Book("A");
+    Book bBook = new Book("B");
+    Book dBook = new Book("D");
 
     @Test
     void testListIsNotNull() {
-        BookCollection bookCollection = new BookCollection();
         assertNotNull(bookCollection.getCollection());
     }
 
     @Test
     void sizeCheckTest() {
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("first book");
-        Book secondBook = new Book("second Book");
-        Book thirdBook = new Book("third book");
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
@@ -28,22 +31,14 @@ class BookCollectionTest {
 
     @Test
     void bookPositionCheckTest() {
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("first book");
-        Book secondBook = new Book("second Book");
-        Book thirdBook = new Book("third book");
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
-        assertEquals(secondBook, bookCollection.getCollection().get(1));
+        assertEquals("second Book", bookCollection.getBookByTittlePosition(1));
     }
 
    @Test
     void notDuplicateBookTest() {
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("first book");
-        Book secondBook = new Book("second Book");
-        Book thirdBook = new Book("third book");
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
@@ -52,23 +47,14 @@ class BookCollectionTest {
 
     @Test
     void titlePositionTest() {
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("first book");
-        Book secondBook = new Book("second Book");
-        Book thirdBook = new Book("third book");
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
-        assertEquals("second Book", bookCollection.getCollection().get(1).getTittle());
+        assertEquals("second Book", bookCollection.getCollection().get(1).getTitle());
     }
 
     @Test
     void addBookTest() {
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("first book");
-        Book secondBook = new Book("second Book");
-        Book thirdBook = new Book("third book");
-        Book fourthBook = new Book("fourth book");
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
@@ -78,11 +64,6 @@ class BookCollectionTest {
 
     @Test
     void listReductionTest() {
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("first book");
-        Book secondBook = new Book("second Book");
-        Book thirdBook = new Book("third book");
-        Book fourthBook = new Book("fourth book");
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
@@ -93,23 +74,17 @@ class BookCollectionTest {
 
     @Test
     void orderListTest(){
-        BookCollection bookCollection = new BookCollection();
-        Book firstBook = new Book("A");
-        Book secondBook = new Book("B");
-        Book thirdBook = new Book("D");
-
-        bookCollection.addBook(firstBook);
-        bookCollection.addBook(secondBook);
-        bookCollection.addBook(thirdBook);
+        bookCollection.addBook(aBook);
+        bookCollection.addBook(bBook);
+        bookCollection.addBook(dBook);
 
         bookCollection.deleteBookByTitle("D");
         bookCollection.addBook(new Book("C"));
         List<Book> bookList = bookCollection.getCollection();
 
-        bookList.sort(Comparator.comparing(Book::getTittle));
-        assertEquals("A", bookList.get(0).getTittle());
-        assertEquals("B", bookList.get(1).getTittle());
-        assertEquals("C", bookList.get(2).getTittle());
+        bookList.sort(Comparator.comparing(Book::getTitle));
+        assertEquals("A", bookList.get(0).getTitle());
+        assertEquals("B", bookList.get(1).getTitle());
+        assertEquals("C", bookList.get(2).getTitle());
     }
-
 }

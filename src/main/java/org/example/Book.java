@@ -1,14 +1,14 @@
 package org.example;
 
 public class Book {
-    private String tittle;
+    private String title;
 
-    public Book(String tittle) {
-        this.tittle = tittle;
+    public Book(String title) {
+        this.title = title;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
 }

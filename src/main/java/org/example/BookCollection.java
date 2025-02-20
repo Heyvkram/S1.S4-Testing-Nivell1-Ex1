@@ -1,56 +1,48 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BookCollection {
-    private ArrayList<Book> books = new ArrayList<>();
-
+    private List<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {
-        books.add(book);
+        if(!duplicateChecker(books)){
+            books.add(book);
+        }else{
+            System.out.println("the book already exists in the collection");
+        }
     }
 
     public List<Book> getCollection() {
         return new ArrayList<>(books);
     }
 
-    public Book getBookByTittle(String tittle) throws CustomException {
-        int i = 0;
-        while ( i < books.size() ) {
-            if (books.get(i).getTittle().equalsIgnoreCase(tittle)) {
-                return books.get(i);
-            }
-            i++;
+    public String getBookByTittlePosition(int position) {
+        if (position < 0 || position >=books.size()) {
+            throw new IndexOutOfBoundsException();
         }
-        throw new CustomException("Book not found");
+        return books.get(position).getTitle();
+    }
+
+    public void addBookByPosition(int position, Book book){
+        if(!duplicateChecker(books)){
+            books.add(position, book);
+        }else{
+            System.out.println("the book already exists in the collection");
+        }
     }
 
     public boolean duplicateChecker(List<Book> books){
-        int i = 0;
-        while (i < books.size()) {
-            int j = i + 1;
-            while (j < books.size()) {
-                if (books.get(i).getTittle().equalsIgnoreCase(books.get(j).getTittle())) {
-                    return true;
-                }
-                j++;
+        Set<String> titles = new HashSet<>();
+        for (Book book : books) {
+            if (titles.contains(book.getTitle().toLowerCase())) {
+                return true;
             }
-            i++;
+            titles.add(book.getTitle().toLowerCase());
         }
         return false;
     }
 
-    public void addBookByPosition(int position, Book book){
-        books.add(position, book);
-    }
-
     public void deleteBookByTitle(String title) {
-        int i = 0;
-        while ( i < books.size() ) {
-            if (books.get(i).getTittle().equalsIgnoreCase(title)) {
-                books.remove(i);
-            }
-            i++;
-        }
+       books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
     }
 }
