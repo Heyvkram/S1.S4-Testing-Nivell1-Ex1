@@ -11,6 +11,7 @@ class BookCollectionTest {
     Book firstBook = new Book("first book");
     Book secondBook = new Book("second Book");
     Book thirdBook = new Book("third book");
+    Book duplicateThirdBook = new Book("third book");
     Book fourthBook = new Book("fourth book");
     Book aBook = new Book("A");
     Book bBook = new Book("B");
@@ -42,6 +43,7 @@ class BookCollectionTest {
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
+        bookCollection.addBook(duplicateThirdBook);
         assertFalse(bookCollection.duplicateChecker(bookCollection.getCollection()));
     }
 

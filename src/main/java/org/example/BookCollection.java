@@ -32,12 +32,10 @@ public class BookCollection {
     }
 
     public boolean duplicateChecker(List<Book> books){
-        Set<String> titles = new HashSet<>();
         for (Book book : books) {
-            if (titles.contains(book.getTitle().toLowerCase())) {
+            if (books.contains(book.getTitle())) {
                 return true;
             }
-            titles.add(book.getTitle().toLowerCase());
         }
         return false;
     }
