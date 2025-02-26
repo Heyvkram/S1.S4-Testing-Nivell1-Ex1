@@ -35,7 +35,7 @@ class BookCollectionTest {
         bookCollection.addBook(firstBook);
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
-        assertEquals("second Book", bookCollection.getBookByTittlePosition(1));
+        assertEquals("second Book", bookCollection.getBookByTitlePosition(1));
     }
 
    @Test
@@ -44,7 +44,7 @@ class BookCollectionTest {
         bookCollection.addBook(secondBook);
         bookCollection.addBook(thirdBook);
         bookCollection.addBook(duplicateThirdBook);
-        assertFalse(bookCollection.duplicateChecker(bookCollection.getCollection()));
+       assertEquals(3, bookCollection.getCollection().size());
     }
 
     @Test

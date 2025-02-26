@@ -5,10 +5,10 @@ public class BookCollection {
     private List<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {
-        if(!duplicateChecker(books)){
+        if (!duplicateChecker(book)) {
             books.add(book);
-        }else{
-            System.out.println("the book already exists in the collection");
+        } else {
+            System.out.println("The book already exists in the collection");
         }
     }
 
@@ -16,24 +16,28 @@ public class BookCollection {
         return new ArrayList<>(books);
     }
 
-    public String getBookByTittlePosition(int position) {
-        if (position < 0 || position >=books.size()) {
+    public String getBookByTitlePosition(int position) {
+        if (position < 0 || position >= books.size()) {
             throw new IndexOutOfBoundsException();
         }
         return books.get(position).getTitle();
     }
 
-    public void addBookByPosition(int position, Book book){
-        if(!duplicateChecker(books)){
+    public void addBookByPosition(int position, Book book) {
+        if (position < 0 || position > books.size()) {
+            System.out.println("Invalid position");
+            return;
+        }
+        if (!duplicateChecker(book)) {
             books.add(position, book);
-        }else{
-            System.out.println("the book already exists in the collection");
+        } else {
+            System.out.println("The book already exists in the collection");
         }
     }
 
-    public boolean duplicateChecker(List<Book> books){
+    public boolean duplicateChecker(Book bookToCheck) {
         for (Book book : books) {
-            if (books.contains(book.getTitle())) {
+            if (book.equals(bookToCheck)) {
                 return true;
             }
         }
@@ -41,6 +45,6 @@ public class BookCollection {
     }
 
     public void deleteBookByTitle(String title) {
-       books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+        books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
     }
 }
